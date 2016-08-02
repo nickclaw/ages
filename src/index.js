@@ -15,7 +15,7 @@ const max = year * 10;
  */
 function toDate(date) {
   return date instanceof Date
-    ? date : new Date(val);
+    ? date : new Date(date);
 }
 
 /**
@@ -44,9 +44,8 @@ function diffToString(ms) {
 }
 
 export default {
-  ago(val) {
+  ago(val, now = new Date()) {
     const date = toDate(val);
-    const now = new Date();
     const diff = now - date;
 
     return diff >= 0
@@ -54,9 +53,8 @@ export default {
       : '-' + diffToString(-diff);
   },
 
-  until(val) {
+  until(val, now = new Date()) {
     const date = toDate(val);
-    const now = new Date();
     const diff = date - now;
 
     return diff >= 0
