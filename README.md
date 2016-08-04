@@ -2,6 +2,33 @@
 
 Your terrible time estimator.
 
+### Example
+```js
+ages.until(weekFromNow); // 1w
+
+ages.until(now); // 1m
+
+ages.until(inAThousandYears); // ?
+
+ages.ago(tuesday, thursday); // 2d
+
+ages.ago(nextWeek, today); //-1w
+
+ages.ago(theNineties); // ? (im so old)
+
+// customize formatting
+// live life dangerously
+ages.ago(a, b, {
+  minute: 'years',
+  hour: 'minutes',
+  day: 'week',
+  week: 'years',
+  month: '?',
+  year: 'month',
+  fallback: 'seconds'
+});
+```
+
 ### API
 
 #### `ages.ago(target[, fromDate[, formats]]) -> String`
