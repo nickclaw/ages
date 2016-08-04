@@ -8,6 +8,16 @@ export const month = day * 30; // meh
 export const year = day * 365; // pretty good
 const max = year * 10;
 
+const defaultFormats = {
+  minute: 'm',
+  hour: 'h',
+  day: 'd',
+  week: 'w',
+  month: 'M',
+  year: 'Y',
+  fallback: '?',
+};
+
 /**
  * Basic date casting
  * @param {String|Date} date
@@ -20,7 +30,7 @@ function toDate(date) {
 
 
 const ages = {
-  ago(_target, _fromDate = new Date()) {
+  ago(_target, _fromDate = new Date(), formats = defaultFormats) {
     const target = toDate(_target);
     const fromDate = toDate(_fromDate);
     const diff = fromDate - target;
@@ -30,7 +40,7 @@ const ages = {
       : '-' + ages.msToString(-diff);
   },
 
-  until(_target, _fromDate = new Date()) {
+  until(_target, _fromDate = new Date(), formats = defaultFormats) {
     const target = toDate(_target);
     const fromDate = toDate(_fromDate);
     const diff = target - fromDate;
@@ -40,23 +50,23 @@ const ages = {
       : '-' + ages.msToString(-diff);
   }
 
-  msToString(ms) {
+  msToString(ms, formats = defaultFormats) {
     if (ms < minute) {
-      return '1m';
+      return '1' + formats.minute;
     } if (ms < hour) {
-      return floor(ms / minute) + 'm';
+      return floor(ms / minute) + formats.minute;
     } else if (ms < day) {
-      return floor(ms / hour) + 'h';
+      return floor(ms / hour) + formats.hour;
     } else if (ms < week) {
-      return floor(ms / day) + 'd';
+      return floor(ms / day) + formats.day;
     } else if (ms < month) {
-      return floor(ms / week) + 'w';
+      return floor(ms / week) + formats.week;
     } else if (ms < year) {
-      return floor(ms / month) + 'M';
+      return floor(ms / month) + formats.month;
     } else if (ms < max) {
-      return floor(ms / year) + 'y';
+      return floor(ms / year) + formats.year;
     } else {
-      return '';
+      return formats.fallback;
     }
   }
 };
