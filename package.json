@@ -12,7 +12,17 @@
     "publish:patch": "npm version patch && npm publish",
     "postpublish": "git push origin master --tags"
   },
-  "keywords": [],
+  "keywords": [
+    "time",
+    "timeago",
+    "ago",
+    "until",
+    "date",
+    "short",
+    "minute",
+    "hour",
+    "second"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
