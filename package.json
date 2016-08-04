@@ -4,6 +4,7 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
+    "test": "mocha",
     "build": "rm -rf lib && babel src --out-dir lib",
     "prepublish": "in-publish && npm run build || not-in-publish",
     "publish:major": "npm version major && npm publish",
@@ -20,6 +21,8 @@
   "devDependencies": {
     "babel-cli": "^6.11.4",
     "babel-preset-es2015": "^6.9.0",
-    "in-publish": "^2.0.0"
+    "babel-register": "^6.11.6",
+    "in-publish": "^2.0.0",
+    "mocha": "^3.0.0"
   }
 }

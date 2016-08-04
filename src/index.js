@@ -48,7 +48,7 @@ const ages = {
     return diff >= 0
       ? ages.msToString(diff)
       : '-' + ages.msToString(-diff);
-  }
+  },
 
   msToString(ms, formats = defaultFormats) {
     if (ms < minute) {
