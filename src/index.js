@@ -18,47 +18,47 @@ function toDate(date) {
     ? date : new Date(date);
 }
 
-/**
- * Generate a short string representation time in ms
- * @param {Number} ms - positive value in ms
- * @return {String}
- */
-function diffToString(ms) {
-  if (ms < minute) {
-    return '1m';
-  } if (ms < hour) {
-    return floor(ms / minute) + 'm';
-  } else if (ms < day) {
-    return floor(ms / hour) + 'h';
-  } else if (ms < week) {
-    return floor(ms / day) + 'd';
-  } else if (ms < month) {
-    return floor(ms / week) + 'w';
-  } else if (ms < year) {
-    return floor(ms / month) + 'M';
-  } else if (ms < max) {
-    return floor(ms / year) + 'y';
-  } else {
-    return '';
-  }
-}
 
-export default {
-  ago(val, now = new Date()) {
-    const date = toDate(val);
-    const diff = now - date;
+const ages = {
+  ago(_target, _fromDate = new Date()) {
+    const target = toDate(_target);
+    const fromDate = toDate(_fromDate);
+    const diff = fromDate - target;
 
     return diff >= 0
-      ? diffToString(diff)
-      : '-' + diffToString(-diff);
+      ? ages.msToString(diff)
+      : '-' + ages.msToString(-diff);
   },
 
-  until(val, now = new Date()) {
-    const date = toDate(val);
-    const diff = date - now;
+  until(_target, _fromDate = new Date()) {
+    const target = toDate(_target);
+    const fromDate = toDate(_fromDate);
+    const diff = target - fromDate;
 
     return diff >= 0
-      ? diffToString(diff)
-      : '-' + diffToString(-diff);
+      ? ages.msToString(diff)
+      : '-' + ages.msToString(-diff);
+  }
+
+  msToString(ms) {
+    if (ms < minute) {
+      return '1m';
+    } if (ms < hour) {
+      return floor(ms / minute) + 'm';
+    } else if (ms < day) {
+      return floor(ms / hour) + 'h';
+    } else if (ms < week) {
+      return floor(ms / day) + 'd';
+    } else if (ms < month) {
+      return floor(ms / week) + 'w';
+    } else if (ms < year) {
+      return floor(ms / month) + 'M';
+    } else if (ms < max) {
+      return floor(ms / year) + 'y';
+    } else {
+      return '';
+    }
   }
 };
+
+export default ages;
