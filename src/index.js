@@ -18,21 +18,10 @@ const defaultFormats = {
   fallback: '?',
 };
 
-/**
- * Basic date casting
- * @param {String|Date} date
- * @return {Date}
- */
-function toDate(date) {
-  return date instanceof Date
-    ? date : new Date(date);
-}
-
-
 const ages = {
   ago(_target, _fromDate = new Date(), formats = defaultFormats) {
-    const target = toDate(_target);
-    const fromDate = toDate(_fromDate);
+    const target = new Date(_target);
+    const fromDate = new Date(_fromDate);
     const diff = fromDate - target;
 
     return diff >= 0
@@ -41,8 +30,8 @@ const ages = {
   },
 
   until(_target, _fromDate = new Date(), formats = defaultFormats) {
-    const target = toDate(_target);
-    const fromDate = toDate(_fromDate);
+    const target = new Date(_target);
+    const fromDate = new Date(_fromDate);
     const diff = target - fromDate;
 
     return diff >= 0
